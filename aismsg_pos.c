@@ -1,6 +1,10 @@
+/// AIS position message abstraction over bcl's
+/// https://github.com/bcl/aisparser (BSD license)
+///
+/// This file provides a simplified aismsg_pos struct that contains
+/// the common parts of many message types (1, 2, 3, 18, 19).
 
 #define _GNU_SOURCE // http://stackoverflow.com/questions/15334558/compiler-gets-warnings-when-using-strptime-function-c
-
 
 #include <string.h>
 #include <time.h>
