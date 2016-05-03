@@ -119,8 +119,18 @@ int main(int argc, char *argv[]) {
     memset(pos, 0, sizeof(aismsg_pos));
     
     if((err = buf2pos(buf, pos)) == 0) {
-      printf("{\"ts\":%ld,\"mmsi\":\"%09ld\",\"pos\":[%0.6f,%0.6f]}\n",
-             pos->ts, pos->userid, pos->long_ddd, pos->lat_dd);
+      printf("{\"type\":\"Feature\","
+             "" "\"properties\":{"
+             ""   "\"ts\":%ld,"
+             ""   "\"mmsi\":\"%09ld\""
+             "" "},"
+             "" "\"geometry\":{"
+             ""   "\"type\":\"Point\","
+             ""   "\"coordinates\":[%0.6f,%0.6f]"
+             "" "}"
+             "}\n",
+             pos->long_ddd, pos->lat_dd,
+             pos->ts, pos->userid );
     } // else printf("error in buf2aismsg_pos %d\n", err);
   }
   return 0;
