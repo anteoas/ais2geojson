@@ -47,7 +47,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
 
   if (assemble_vdm( &ais, buf ) == 0) {
     ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6);
-            
+
     switch( ais.msgid ) {
     case 1:
       if( parse_ais_1( &ais, &msg_1 ) == 0 )
@@ -102,7 +102,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
       return -1;
     }
   } else return -2;
-  
+
   return 0;
 }
 
@@ -115,9 +115,9 @@ int main(int argc, char *argv[]) {
 
   while( !feof(stdin) ) {
     if (fgets( buf, 255, stdin ) == NULL ) break;
-    
+
     memset(pos, 0, sizeof(aismsg_pos));
-    
+
     if((err = buf2pos(buf, pos)) == 0) {
       printf("{\"type\":\"Feature\","
              "" "\"properties\":{"
