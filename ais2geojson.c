@@ -30,7 +30,15 @@ int main(int argc, char *argv[]) {
     memset(pos, 0, sizeof(aismsg_pos));
 
     if((err = buf2pos(buf, pos)) == 0) {
-      printf("{\"type\":\"Feature\","
+      printf("{\"type\":\"Feature\",");
+      printf(
+             "" "\"geometry\":{"
+             ""   "\"type\":\"Point\","
+             ""   "\"coordinates\":[%0.6f,%0.6f]"
+             "" "},",
+             pos->msgid,
+             pos->long_ddd, pos->lat_dd);
+      printf(
              "" "\"properties\":{"
              ""   "\"mmsi\":\"%ld\",", pos->userid);
       if(config_cog && pos->cog >= 0)   printf("\"cog\":%0.1f,", pos->cog);
@@ -39,14 +47,7 @@ int main(int argc, char *argv[]) {
       // always print ts so we don't need to check if we need comma or not
       if(pos->ts == 0) printf("\"ts\":false");
       else             printf("\"ts\":%ld", pos->ts);
-      printf(
-             "" "},"
-             "" "\"geometry\":{"
-             ""   "\"type\":\"Point\","
-             ""   "\"coordinates\":[%0.6f,%0.6f]"
-             "" "}"
-             "}\n",
-             pos->long_ddd, pos->lat_dd);
+      printf("}}\n");
     } // else printf("error in buf2aismsg_pos %d\n", err);
   }
   return 0;
