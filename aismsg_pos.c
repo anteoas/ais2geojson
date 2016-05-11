@@ -42,6 +42,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
 
   if (assemble_vdm( &ais, buf ) == 0) {
     ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6);
+    pos->msgid = ais.msgid;
 
     switch( ais.msgid ) {
     case 1:
