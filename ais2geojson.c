@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     if((err = buf2pos(buf, pos)) == 0) {
       printf("{\"type\":\"Feature\",");
       printf(
-             "" "\"type\": %d,"
+             // "" "\"aistype\": %d,"
              "" "\"geometry\":{"
              ""   "\"type\":\"Point\","
              ""   "\"coordinates\":[%0.6f,%0.6f]"
