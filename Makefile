@@ -14,3 +14,6 @@ ais2geojson: ais2geojson.c aismsg_pos.h aismsg_pos.c
 
 test: ais2geojson
 	./test.sh
+
+install: ais2geojson
+	install ais2geojson /usr/bin/
