@@ -111,5 +111,11 @@ int buf2pos(char* buf, aismsg_pos *pos) {
     }
   } else return -2;
 
+  if(pos->lat_dd >  90) return 100;
+  if(pos->lat_dd < -90) return 101;
+
+  if(pos->long_ddd >  180) return 102;
+  if(pos->long_ddd < -180) return 103;
+
   return 0;
 }
