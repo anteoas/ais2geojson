@@ -22,7 +22,7 @@ echo '!BSVDM,1,1,,A,13oUhr0000151NhWKUi1vPvJ08Re,0*3A' | ais2geojson  | jq '.'
 }
 ```
 
-It can process around 150 messages per second. It currently takes in no arguments.
+It can process around 150 000 messages per second. It currently takes in no arguments.
 
 # Timestamps
 
