@@ -59,3 +59,5 @@ echo '2017-02-20T00:00:00;!BSVDM,1,1,,A,13oUhr0000151NhWKUi1vPvJ08Re,0*3A' | ais
 
 `aisparser` stolen from https://github.com/bcl/aisparser, simplified
 and reorganized here.
+
+[Anteo AS](http://anteo.no/) is publishing this piece of software with the BSD license.
