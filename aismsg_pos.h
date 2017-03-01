@@ -9,7 +9,7 @@ struct aismsg_pos {
 
   float cog;
   float sog;
-  int smi;
+  int smi; // 2 bits special-man-indicator
 
   long   userid;
   long   ts;

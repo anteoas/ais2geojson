@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
       printf(""   "\"aistype\":%ld,", pos->msgid);
       if(config_cog && pos->cog >= 0)   printf("\"cog\":%0.1f,", pos->cog);
       if(config_sog && pos->sog >= 0)   printf("\"sog\":%0.1f,", pos->sog);
-      if(config_smi && pos->smi)   printf("\"smi\":%0.1f,", pos->smi);
+      if(config_smi && pos->smi >= 0)   printf("\"smi\":%d,", pos->smi);
       // always print ts so we don't need to check if we need comma or not
       if(pos->ts == 0) printf("\"ts\":false");
       else             printf("\"ts\":%ld", pos->ts);
