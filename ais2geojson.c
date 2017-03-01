@@ -42,6 +42,7 @@ int main(int argc, char *argv[]) {
       printf(
              "" "\"properties\":{"
              ""   "\"mmsi\":\"%ld\",", pos->userid);
+      printf(""   "\"aistype\":%ld,", pos->msgid);
       if(config_cog && pos->cog >= 0)   printf("\"cog\":%0.1f,", pos->cog);
       if(config_sog && pos->sog >= 0)   printf("\"sog\":%0.1f,", pos->sog);
       if(config_smi && pos->smi)   printf("\"smi\":%0.1f,", pos->smi);
