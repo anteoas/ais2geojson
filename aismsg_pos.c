@@ -26,13 +26,7 @@ float sog2float(int sog) { return sog > 100 ? -1.0 : sog / 10.0; }
 // structure. returns 0 of success.
 int buf2pos(char* buf, aismsg_pos *pos) {
   static ais_state ais;
-  static aismsg_1  msg_1;
-  static aismsg_2  msg_2;
-  static aismsg_3  msg_3;
-  static aismsg_4  msg_4;
-  static aismsg_9  msg_9;
-  static aismsg_18 msg_18;
-  static aismsg_19 msg_19;
+
 
   memset( &ais, 0, sizeof( ais_state ) );
 
@@ -45,7 +39,8 @@ int buf2pos(char* buf, aismsg_pos *pos) {
     pos->msgid = ais.msgid;
 
     switch( ais.msgid ) {
-    case 1:
+    case 1: {
+      static aismsg_1  msg_1;
       if( parse_ais_1( &ais, &msg_1 ) == 0 )
         {
           pos->userid = msg_1.userid;
@@ -54,7 +49,9 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_1.sog);
         } else return 1;
       break;
-    case 2:
+    }
+    case 2: {
+      static aismsg_2 msg_2;
       if( parse_ais_2( &ais, &msg_2 ) == 0 )
         {
           pos->userid = msg_2.userid;
@@ -63,7 +60,9 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_2.sog);
         } else return 2;
       break;
-    case 3:
+    }
+    case 3: {
+      static aismsg_3 msg_3;
       if( parse_ais_3( &ais, &msg_3 ) == 0 )
         {
           pos->userid = msg_3.userid;
@@ -72,14 +71,18 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_3.sog);
         } else return 3;
       break;
-    case 4:
+    }
+    case 4: {
+      static aismsg_4 msg_4;
       if( parse_ais_4( &ais, &msg_4 ) == 0 )
         {
           pos->userid = msg_4.userid;
           pos2ddd( msg_4.latitude, msg_4.longitude, &pos->lat_dd, &pos->long_ddd );
         } else return 4;
       break;
-    case 9:
+    }
+    case 9: {
+      static aismsg_9 msg_9;
       if( parse_ais_9( &ais, &msg_9 ) == 0 )
         {
           pos->userid = msg_9.userid;
@@ -88,7 +91,9 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_9.sog);
         } else return 0;
       break;
-    case 18:
+    }
+    case 18: {
+      static aismsg_18 msg_18;
       if( parse_ais_18( &ais, &msg_18 ) == 0 )
         {
           pos->userid = msg_18.userid;
@@ -97,7 +102,9 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_18.sog);
         } else return 18;
       break;
-    case 19:
+    }
+    case 19: {
+      static aismsg_19 msg_19;
       if( parse_ais_19( &ais, &msg_19 ) == 0 )
         {
           pos->userid = msg_19.userid;
@@ -106,6 +113,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_19.sog);
         } else return 19;
       break;
+    }
     default:
       return -1;
     }
