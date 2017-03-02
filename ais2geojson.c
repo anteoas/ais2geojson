@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
              // "" "\"aistype\": %d,"
              "" "\"geometry\":{"
              ""   "\"type\":\"Point\","
-             ""   "\"coordinates\":[%0.6f,%0.6f]"
+             ""   "\"coordinates\":[%0.7f,%0.7f]"
              "" "},",
              pos->msgid,
              pos->long_ddd, pos->lat_dd);
