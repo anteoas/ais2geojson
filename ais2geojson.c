@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
       printf(
              "" "\"properties\":{"
              ""   "\"mmsi\":\"%ld\",", pos->userid);
-      printf(""   "\"aistype\":%ld,", pos->msgid);
+      printf(""   "\"aistype\":%d,", pos->msgid);
       if(config_cog && pos->cog >= 0)   printf("\"cog\":%0.1f,", pos->cog);
       if(config_sog && pos->sog >= 0)   printf("\"sog\":%0.1f,", pos->sog);
       if(config_smi && pos->smi >= 0)   printf("\"smi\":%d,", pos->smi);
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
         long int ts = strtol(pos->ts, &endptr, 10);
         if(errno == 0 && // no errors
            (endptr + 1 == ais)) { // parsed the entire string (pos->ts+strlen(pos->ts) == ais)
-          printf("\"ts\":%d", ts);
+          printf("\"ts\":%ld", ts);
         } else {
           printf("\"ts\":\"%s\"", pos->ts);
         }
