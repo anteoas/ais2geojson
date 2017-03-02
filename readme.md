@@ -61,9 +61,6 @@ $ echo '123;!BSVDM,1,1,,A,13oUhr0000151NhWKUi1vPvJ08Re,0*3A' | ./ais2geojson   |
 
 ## TODO
 
-- Make the timestamp dumber: copy whatever's the `;` into the `ts` property, no need to parse to epoch
-- Customizaeable output
-  - Include the `smi` field
 - Allow command line arguments options to include/exclude fields
 
 ## Credits
