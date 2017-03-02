@@ -12,7 +12,7 @@ struct aismsg_pos {
   int smi; // 2 bits special-man-indicator
 
   long   userid;
-  long   ts;
+  char* ts;
 };
 
 typedef struct aismsg_pos aismsg_pos;

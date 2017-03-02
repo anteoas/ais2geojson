@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <errno.h>
 
 #include "aismsg_pos.h"
-
 
 // a buf typically looks like this:
 // 2015-09-20T17:00:00;!BSVDM,1,1,,B,13mBwe0P00Pa6:hTHmD>4?vT2<08,0*12
@@ -29,7 +29,19 @@ int main(int argc, char *argv[]) {
 
     memset(pos, 0, sizeof(aismsg_pos));
 
-    if((err = buf2pos(buf, pos)) == 0) {
+    static char* ais;
+    static char* prefix;
+    // try to split line and find a timestamp prefix
+    if((ais = strchr(buf, ';')) != NULL) {
+      ais[0] = '\0'; // turn ; into '\0', same buffer nicely becomes two strings
+      ais++; // point ais just past the first ;
+      pos->ts = buf; // timestamp now points to the buffer beginning (NULL-term were ; was)
+    } else { // no ; found on line
+      ais = buf;
+      prefix = "";
+    }
+
+    if((err = buf2pos(ais, pos)) == 0) {
       printf("{\"type\":\"Feature\",");
       printf(
              // "" "\"aistype\": %d,"
@@ -48,7 +60,18 @@ int main(int argc, char *argv[]) {
       if(config_smi && pos->smi >= 0)   printf("\"smi\":%d,", pos->smi);
       // always print ts so we don't need to check if we need comma or not
       if(pos->ts == 0) printf("\"ts\":false");
-      else             printf("\"ts\":%ld", pos->ts);
+      else {
+        // let's try to output ts as an integer first.
+        static char* endptr;
+        errno = 0;
+        long int ts = strtol(pos->ts, &endptr, 10);
+        if(errno == 0 && // no errors
+           (endptr + 1 == ais)) { // parsed the entire string (pos->ts+strlen(pos->ts) == ais)
+          printf("\"ts\":%d", ts);
+        } else {
+          printf("\"ts\":\"%s\"", pos->ts);
+        }
+      }
       printf("}}\n");
     } // else printf("error in buf2aismsg_pos %d\n", err);
   }

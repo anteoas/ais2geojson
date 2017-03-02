@@ -11,7 +11,6 @@
 #define _GNU_SOURCE // http://stackoverflow.com/questions/15334558/compiler-gets-warnings-when-using-strptime-function-c
 
 #include <string.h>
-#include <time.h>
 
 #include <portable.h>
 #include <nmea.h>
@@ -42,12 +41,7 @@ int regional2smi(char regional) {
 int buf2pos(char* buf, aismsg_pos *pos) {
   static ais_state ais;
 
-
   memset( &ais, 0, sizeof( ais_state ) );
-
-  static struct tm time;
-  if(strptime(buf, "%Y-%m-%dT%T", &time) != 0)
-    pos->ts = mktime(&time);
 
   if (assemble_vdm( &ais, buf ) == 0) {
     ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6);

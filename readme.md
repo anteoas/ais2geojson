@@ -22,11 +22,14 @@ echo '!BSVDM,1,1,,A,13oUhr0000151NhWKUi1vPvJ08Re,0*3A' | ais2geojson  | jq '.'
 }
 ```
 
-It can process around 150 000 messages per second. It currently takes in no arguments.
+It can process around 350k messages per second. It currently takes in
+no arguments.
 
-# Timestamps
+# Timestamps prefix
 
-As timestamps are not accurately present in the AIS messages themselves, ais2geojson will include the timestamp proceeding a `;` if present. This lets you do:
+As timestamps are not accurately present in the AIS messages
+themselves, ais2geojson will include the timestamp proceeding a `;` if
+present. This lets you do:
 
 ```
 echo '2017-02-20T00:00:00;!BSVDM,1,1,,A,13oUhr0000151NhWKUi1vPvJ08Re,0*3A' | ais2geojson  | jq '.'
@@ -43,9 +46,17 @@ echo '2017-02-20T00:00:00;!BSVDM,1,1,,A,13oUhr0000151NhWKUi1vPvJ08Re,0*3A' | ais
     "mmsi": "259617000",
     "cog": 50.6,
     "sog": 0,
-    "ts": 1487545200
+    "ts": "2017-02-20T00:00:00"
   }
 }
+```
+
+If the timestamp can be parsed as an integer, the JSON printout will
+reflect this:
+
+```
+$ echo '123;!BSVDM,1,1,,A,13oUhr0000151NhWKUi1vPvJ08Re,0*3A' | ./ais2geojson   | jq -c .properties
+{"mmsi":"259617000","aistype":1,"cog":50.6,"sog":0,"smi":0,"ts":123}
 ```
 
 ## TODO
