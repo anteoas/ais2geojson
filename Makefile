@@ -7,7 +7,7 @@ SOURCES = ./aisparser/nmea.c \
 
 ais2geojson: ais2geojson.c aismsg_pos.h aismsg_pos.c
 
-	$(CC) -lm -I./aisparser -o ais2geojson \
+	$(CC) -O5 -lm -I./aisparser -o ais2geojson \
 		ais2geojson.c \
 		aismsg_pos.c \
 		$(SOURCES)
