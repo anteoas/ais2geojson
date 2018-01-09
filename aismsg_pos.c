@@ -22,7 +22,7 @@
 
 // https://github.com/dma-enav/EPD/blob/master/epd-common/src/main/java/dk/dma/epd/common/prototype/ais/VesselPositionData.java#L100
 float cog2float(int cog) { return cog >= 3600 ? -1.0 : cog / 10.0; }
-float sog2float(int sog) { return sog > 100 ? -1.0 : sog / 10.0; }
+float sog2float(int sog) { return sog > 1022 ? -1.0 : sog / 10.0; }
 
 
 // this is great. the [ITU.1371] version 4 says there's a special
