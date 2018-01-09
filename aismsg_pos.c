@@ -57,6 +57,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos2ddd( msg_1.latitude, msg_1.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_1.cog);
           pos->sog = sog2float(msg_1.sog);
+          pos->trueheading = msg_1.true;
           pos->smi = regional2smi(msg_1.regional);
         } else return 1;
       break;
@@ -69,6 +70,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos2ddd( msg_2.latitude, msg_2.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_2.cog);
           pos->sog = sog2float(msg_2.sog);
+          pos->trueheading = msg_2.true;
           pos->smi = regional2smi(msg_2.regional);
         } else return 2;
       break;
@@ -81,6 +83,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos2ddd( msg_3.latitude, msg_3.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_3.cog);
           pos->sog = sog2float(msg_3.sog);
+          pos->trueheading = msg_3.true;
           pos->smi = regional2smi(msg_3.regional);
         } else return 3;
       break;
@@ -114,6 +117,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos2ddd( msg_18.latitude, msg_18.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_18.cog);
           pos->sog = sog2float(msg_18.sog);
+          pos->trueheading = msg_18.true;
           // [ITU.1371] says message has no regional / smi
         } else return 18;
       break;
@@ -126,6 +130,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos2ddd( msg_19.latitude, msg_19.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_19.cog);
           pos->sog = sog2float(msg_19.sog);
+          pos->trueheading = msg_19.true;
           // [ITU.1371] says message has not regional / smi
         } else return 19;
       break;
