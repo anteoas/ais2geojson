@@ -16,4 +16,5 @@ test: ais2geojson
 	./test.sh
 
 install: ais2geojson
-	install ais2geojson /usr/bin/
+	mkdir -p ${DESTDIR}${PREFIX}/usr/bin/
+	install ais2geojson ${DESTDIR}${PREFIX}/usr/bin/
