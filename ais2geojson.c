@@ -1,3 +1,5 @@
+#define _XOPEN_SOURCE
+
 /* -----------------------------------------------------------------------
    Process AIS messages read from stdin and output JSON structure
    Copyright 2006 by Brian C. Lane
@@ -9,6 +11,7 @@
 #include <string.h>
 #include <math.h>
 #include <errno.h>
+#include <time.h>
 
 #include "aismsg_pos.h"
 
@@ -24,6 +27,9 @@ int main(int argc, char *argv[]) {
     config_cog = 1,
     config_trueheading = 1,
     config_sog = 1;
+  struct tm tm_ts;
+  char buf_ts[20];
+
 
   while( !feof(stdin) ) {
     if (fgets( buf, 255, stdin ) == NULL ) break;
@@ -36,7 +42,14 @@ int main(int argc, char *argv[]) {
     if((ais = strchr(buf, ';')) != NULL) {
       ais[0] = '\0'; // turn ; into '\0', same buffer nicely becomes two strings
       ais++; // point ais just past the first ;
-      pos->ts = buf; // timestamp now points to the buffer beginning (NULL-term were ; was)
+
+      if(strptime(buf, "%Y-%m-%dT%H:%M:%S", &tm_ts) != NULL) {
+        snprintf(buf_ts, 20, "%d", mktime(&tm_ts));
+        pos->ts = buf_ts;
+      } else {
+        pos->ts = buf; // timestamp now points to the buffer beginning (NULL-term were ; was)
+      }
+
     } else { // no ; found on line
       ais = buf;
       prefix = "";
