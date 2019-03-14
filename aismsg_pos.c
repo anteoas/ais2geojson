@@ -88,25 +88,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
         } else return 3;
       break;
     }
-    case 4: {
-      static aismsg_4 msg_4;
-      if( parse_ais_4( &ais, &msg_4 ) == 0 )
         {
-          pos->userid = msg_4.userid;
-          pos2ddd( msg_4.latitude, msg_4.longitude, &pos->lat_dd, &pos->long_ddd );
-        } else return 4;
-      break;
-    }
-    case 9: {
-      static aismsg_9 msg_9;
-      if( parse_ais_9( &ais, &msg_9 ) == 0 )
-        {
-          pos->userid = msg_9.userid;
-          pos2ddd( msg_9.latitude, msg_9.longitude, &pos->lat_dd, &pos->long_ddd );
-          pos->cog = cog2float(msg_9.cog);
-          pos->sog = sog2float(msg_9.sog);
-          pos->smi = regional2smi(msg_9.regional);
-        } else return 0;
       break;
     }
     case 18: {

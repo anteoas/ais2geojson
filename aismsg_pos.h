@@ -1,8 +1,8 @@
 
 // common struct for several AIS position message
 struct aismsg_pos {
+  char msgid; // ais message type (1, 2, 3, 18, 19)
 
-  int msgid; // ais message type (1, 2, 3, 18, 19 etc)
 
   double lat_dd;
   double long_ddd;
