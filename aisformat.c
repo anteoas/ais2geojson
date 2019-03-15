@@ -96,10 +96,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  if(!geojson) {
-    printf("timestamp,mmsi,ais_type,lon,lat,cog,sog,true_heading,smi\n");
-  }
-
   while( !feof(stdin) ) {
     if (fgets( buf, 255, stdin ) == NULL ) break;
 
