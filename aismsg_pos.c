@@ -88,7 +88,25 @@ int buf2pos(char* buf, aismsg_pos *pos) {
         } else return 3;
       break;
     }
+    case 5: {
+      int err = 0;
+      static aismsg_5 msg_5;
+      if( (err = parse_ais_5( &ais, &msg_5 )) == 0 )
         {
+          pos->userid = msg_5.userid;
+          pos->imo = msg_5.imo;
+          strcpy(pos->callsign, msg_5.callsign);
+          strcpy(pos->name, msg_5.name);
+          pos->ship_type = msg_5.ship_type;
+          pos->dim_bow = msg_5.dim_bow;
+          pos->dim_stern = msg_5.dim_stern;
+          pos->dim_port = msg_5.dim_port;
+          pos->dim_starboard = msg_5.dim_starboard;
+          pos->pos_type = msg_5.pos_type;
+          pos->eta = msg_5.eta;
+          pos->draught = msg_5.draught;
+          strcpy(pos->dest, msg_5.dest);
+        } else return 5;
       break;
     }
     case 18: {

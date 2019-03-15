@@ -14,10 +14,22 @@ struct aismsg_pos {
 
   long   userid;
   char* ts;
+
+  // ais mesage 5 fields
+  unsigned long imo;
+  char callsign[8];
+  char name[21];
+  unsigned char ship_type;
+  int dim_bow;
+  int dim_stern;
+  char dim_port;
+  char dim_starboard;
+  char pos_type;
+  unsigned long eta;
+  unsigned char draught;
+  char dest[21];
 };
 
 typedef struct aismsg_pos aismsg_pos;
 
-
 int buf2pos(char*, aismsg_pos *);
-

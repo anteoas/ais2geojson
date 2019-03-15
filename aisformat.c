@@ -22,6 +22,10 @@ static struct option options[] =
 };
 
 void writeGeoJSON(char *ais, aismsg_pos *pos) {
+  // ignore message type 5 since it does not have position information
+  if(pos->msgid == 5)
+    return;
+
   printf("{\"type\":\"Feature\",");
   printf(
          "" "\"geometry\":{"
@@ -57,6 +61,9 @@ void writeGeoJSON(char *ais, aismsg_pos *pos) {
 }
 
 void writeCSV(char *ais, aismsg_pos *pos) {
+  // ignore type 5 for now
+  if(pos->msgid == 5) return;
+
   printf("%s,%ld,%d,%0.7f,%0.7f,%0.1f,%0.1f,%d,%d\n",
          pos->ts, pos->userid, pos->msgid,
          pos->long_ddd, pos->lat_dd,
