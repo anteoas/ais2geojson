@@ -37,6 +37,8 @@ void writeGeoJSON(char *ais, aismsg_pos *pos) {
          "" "\"properties\":{"
          ""   "\"mmsi\":\"%ld\",", pos->userid);
   printf(""   "\"aistype\":%d,", pos->msgid);
+  printf(""   "\"nav_status\":%d,", pos->nav_status);
+  printf(""   "\"rot\":%d,", pos->rot);
   if(pos->cog >= 0)   printf("\"cog\":%0.1f,", pos->cog);
   if(pos->sog >= 0)   printf("\"sog\":%0.1f,", pos->sog);
   if(pos->trueheading >= 0 && pos->trueheading < 360) {
@@ -64,12 +66,15 @@ void writeCSV(char *ais, aismsg_pos *pos) {
   // ignore type 5 for now
   if(pos->msgid == 5) return;
 
-  printf("%s,%ld,%d,%0.7f,%0.7f,%0.1f,%0.1f,%d,%d\n",
+  //timestamp,mmsi,ais_type,lon,lat,cog,sog,true_heading,smi,nav_status,rot
+  printf("%s,%ld,%d,%0.7f,%0.7f,%0.1f,%0.1f,%d,%d,%d,%d\n",
          pos->ts, pos->userid, pos->msgid,
          pos->long_ddd, pos->lat_dd,
          pos->cog, pos->sog,
          pos->trueheading,
-         pos->smi);
+         pos->smi,
+         pos->nav_status,
+         pos->rot);
 }
 
 // a buf typically looks like this:

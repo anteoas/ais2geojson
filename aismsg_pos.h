@@ -1,8 +1,9 @@
-
 // common struct for several AIS position message
 struct aismsg_pos {
   char msgid; // ais message type (1, 2, 3, 18, 19)
 
+  char nav_status;
+  unsigned char rot;
 
   double lat_dd;
   double long_ddd;

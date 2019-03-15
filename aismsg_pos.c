@@ -17,7 +17,6 @@
 #include <sixbit.h>
 #include <vdm_parse.h>
 
-
 #include "aismsg_pos.h"
 
 // https://github.com/dma-enav/EPD/blob/master/epd-common/src/main/java/dk/dma/epd/common/prototype/ais/VesselPositionData.java#L100
@@ -54,6 +53,8 @@ int buf2pos(char* buf, aismsg_pos *pos) {
       if( parse_ais_1( &ais, &msg_1 ) == 0 )
         {
           pos->userid = msg_1.userid;
+          pos->nav_status = msg_1.nav_status;
+          pos->rot = msg_1.rot;
           pos2ddd( msg_1.latitude, msg_1.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_1.cog);
           pos->sog = sog2float(msg_1.sog);
@@ -67,6 +68,8 @@ int buf2pos(char* buf, aismsg_pos *pos) {
       if( parse_ais_2( &ais, &msg_2 ) == 0 )
         {
           pos->userid = msg_2.userid;
+          pos->nav_status = msg_2.nav_status;
+          pos->rot = msg_2.rot;
           pos2ddd( msg_2.latitude, msg_2.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_2.cog);
           pos->sog = sog2float(msg_2.sog);
@@ -80,6 +83,8 @@ int buf2pos(char* buf, aismsg_pos *pos) {
       if( parse_ais_3( &ais, &msg_3 ) == 0 )
         {
           pos->userid = msg_3.userid;
+          pos->nav_status = msg_3.nav_status;
+          pos->rot = msg_3.rot;
           pos2ddd( msg_3.latitude, msg_3.longitude, &pos->lat_dd, &pos->long_ddd );
           pos->cog = cog2float(msg_3.cog);
           pos->sog = sog2float(msg_3.sog);
