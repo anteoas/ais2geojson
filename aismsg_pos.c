@@ -47,6 +47,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
     ais.msgid = (unsigned char) get_6bit( &ais.six_state, 6);
     pos->msgid = ais.msgid;
     pos->smi = -1;
+    pos->nav_status = -1;
 
     switch( ais.msgid ) {
     case 1: {
@@ -59,6 +60,8 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_1.sog);
           pos->trueheading = msg_1.true;
           pos->smi = regional2smi(msg_1.regional);
+          pos->nav_status = msg_1.nav_status;
+          pos->pos_acc = msg_1.pos_acc;
         } else return 1;
       break;
     }
@@ -72,6 +75,8 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_2.sog);
           pos->trueheading = msg_2.true;
           pos->smi = regional2smi(msg_2.regional);
+          pos->nav_status = msg_2.nav_status;
+          pos->pos_acc = msg_2.pos_acc;
         } else return 2;
       break;
     }
@@ -85,6 +90,8 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->sog = sog2float(msg_3.sog);
           pos->trueheading = msg_3.true;
           pos->smi = regional2smi(msg_3.regional);
+          pos->nav_status = msg_3.nav_status;
+          pos->pos_acc = msg_3.pos_acc;
         } else return 3;
       break;
     }
@@ -94,6 +101,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
         {
           pos->userid = msg_4.userid;
           pos2ddd( msg_4.latitude, msg_4.longitude, &pos->lat_dd, &pos->long_ddd );
+          pos->pos_acc = msg_4.pos_acc;
         } else return 4;
       break;
     }
@@ -106,6 +114,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->cog = cog2float(msg_9.cog);
           pos->sog = sog2float(msg_9.sog);
           pos->smi = regional2smi(msg_9.regional);
+          pos->pos_acc = msg_9.pos_acc;
         } else return 0;
       break;
     }
@@ -118,6 +127,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->cog = cog2float(msg_18.cog);
           pos->sog = sog2float(msg_18.sog);
           pos->trueheading = msg_18.true;
+          pos->pos_acc = msg_18.pos_acc;
           // [ITU.1371] says message has no regional / smi
         } else return 18;
       break;
@@ -131,6 +141,7 @@ int buf2pos(char* buf, aismsg_pos *pos) {
           pos->cog = cog2float(msg_19.cog);
           pos->sog = sog2float(msg_19.sog);
           pos->trueheading = msg_19.true;
+          pos->pos_acc = msg_19.pos_acc;
           // [ITU.1371] says message has not regional / smi
         } else return 19;
       break;

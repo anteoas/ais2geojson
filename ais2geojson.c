@@ -21,6 +21,8 @@ int main(int argc, char *argv[]) {
 
   char
     config_smi = 1,
+    config_nav_status = 1,
+    config_pos_acc = 1,
     config_cog = 1,
     config_trueheading = 1,
     config_sog = 1;
@@ -58,6 +60,12 @@ int main(int argc, char *argv[]) {
       if(config_sog && pos->sog >= 0)   printf("\"sog\":%0.1f,", pos->sog);
       if(config_trueheading && pos->trueheading >= 0 && pos->trueheading < 360) {
           printf("\"trueHeading\":%d,", pos->trueheading);
+      }
+      if(config_nav_status && pos->nav_status >= 0) {
+        printf("\"navStatus\":%d,", pos->nav_status);
+      }
+      if(config_pos_acc && pos->pos_acc >= 0) {
+        printf("\"posAcc\":%d,", pos->pos_acc);
       }
       if(config_smi && pos->smi >= 0)   printf("\"smi\":%d,", pos->smi);
       // always print ts so we don't need to check if we need comma or not

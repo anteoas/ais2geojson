@@ -11,6 +11,8 @@ struct aismsg_pos {
   float sog;
   int trueheading;
   int smi; // 2 bits special-man-indicator
+  int nav_status;
+  int pos_acc;
 
   long   userid;
   char* ts;
